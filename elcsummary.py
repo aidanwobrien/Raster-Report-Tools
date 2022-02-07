@@ -1,10 +1,11 @@
 # Importing the required modules 
 import tkinter
+from tkinter import filedialog
 import pandas as pd
 from bs4 import BeautifulSoup
 
 # Make the tkinter dialogue box
-from tkinter.filedialog import askopenfilename
+from tkinter.filedialog import askopenfilename, asksaveasfile
 from pandas.core.frame import DataFrame
 filename = askopenfilename()
 path = filename
@@ -41,6 +42,15 @@ df = pd.DataFrame(data, columns = ["value", "pixel", "area"])
 
 # Create a dictionary that labels specific values
 dict = {
+    "11":"Open Beach/Bar",
+    "21":"Open Sand Dune",
+    "23":"Treed Sand Dune",
+    "41":"Open Cliff and Talus",
+    "43":"Treed Cliff and Talus",
+    "52":"Open Alvar",
+    "53":"Shrub Alvar",
+    "64":"Treed Alvar",
+    "65":"Open Bedrock",
     "81":"Open Tallgrass Praire",
     "82":"Tallgrass Savannah",
     "83":"Tallgrass Woodland",
@@ -67,7 +77,16 @@ dict = {
 
 # Create a new column called "name" with the mapped columns
 df["name"] = df["value"].map(dict)
-df["ha"] = (df["area"].astype(int)) / 10000
+
+# Create a new column called "ha" with the property area in hectares
+df["ha"] = (df["area"].astype(float)) / 10000
+
+# Create a new coloumn called "acres" with the property area in acres
+df["ac"] = (df["ha"].astype(float)) * 2.47105
+
+# # Calling your file some name
+
+output_file = input("Enter filename: ")
 
 # Converting Pandas DataFrame into a csv file called "ELC_Summary"
-df.to_csv('ELC_Summary.csv')
+df.to_csv(rf"{output_file}.csv")

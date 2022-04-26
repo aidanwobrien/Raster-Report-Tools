@@ -1,5 +1,5 @@
 # ELC-Summary
-Converts a Southern Ontario Land Resource Information System (SOLRIS) raster HTML report from QGIS to a CSV
+Converts a Southern Ontario Land Resource Information System (SOLRIS) raster HTML report generated from QGIS to a CSV.
 
 Save the .html raster report that is generated when running the "Raster Layer Unique Report" in QGIS.
 
